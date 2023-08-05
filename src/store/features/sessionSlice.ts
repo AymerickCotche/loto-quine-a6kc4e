@@ -4,16 +4,16 @@ import { createSlice } from "@reduxjs/toolkit"
 export interface SessionState {
   id: string
   name: string
-  cards: []
-  users: []
+  date: string
+  status: boolean
 }
 
 // Initial state
 const initialState: SessionState = {
   id: '',
   name: '',
-  cards: [],
-  users: [],
+  date: '',
+  status: false
 };
 
 // Actual Slice
