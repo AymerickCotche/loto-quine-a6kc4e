@@ -21,7 +21,8 @@ model User {
 model Session {
   id       String @default(cuid()) @id
   name     String @unique
-  password String
+  date     String
+  status   Boolean
   cards    Card[]
   users    UsersOnSessions[]
 }
