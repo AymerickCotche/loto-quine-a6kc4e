@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
 
 import { store } from '@/store/store'
+import SessionProviders from './components/SessionProviders'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,8 +19,9 @@ export default function RootLayout({
     <html lang="fr">
       <body className={inter.className}>
         <Provider store={store}>
-
-          {children}
+          <SessionProviders>
+            {children}
+          </SessionProviders>
         </Provider>
         </body>
     </html>
