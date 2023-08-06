@@ -25,6 +25,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
         select: {
           number: {
             select: {
+              id: true,
               value: true
             }
           },

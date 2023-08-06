@@ -1,17 +1,62 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-// Type for our state
-export interface DrawState {
+
+export interface Number {
+  id: string,
+  value: string,
+  drawn: boolean
+}
+// Types
+export interface Draw {
   id: string
   name: string
-  numbers: number[]
+  numbers: string[]
 }
+
+export interface DrawState {
+  draws: Draw[]
+  allnumbers: Number[]
+}
+
+export interface dataObj {
+  drawId: string
+  numberId: string
+  numberValue: string
+}
+
+// AsyncThunk
+
+export const getDraws = createAsyncThunk(
+  'draw/getDraws',
+  async (_, thunkAPI) => {
+    const draws = await fetch('/api/draws')
+    return draws.json()
+  }
+)
+
+export const getNumbers = createAsyncThunk(
+  'draw/getNumbers',
+  async (_, thunkAPI) => {
+    const numbers = await fetch('/api/numbers')
+    return numbers.json()
+  }
+)
+
+export const updateDraws = createAsyncThunk(
+  'draw/updateDraws',
+  async (data: dataObj, thunkAPI) => {
+    const draw = await fetch('/api/draws/update', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    return draw.json()
+  }
+)
 
 // Initial state
 const initialState: DrawState = {
-  id: '',
-  name: '',
-  numbers: []
+  draws: [],
+  allnumbers: []
 };
 
 // Actual Slice
@@ -19,14 +64,25 @@ export const drawSlice = createSlice({
   name: "draw",
   initialState,
   reducers: {
-    
-    setDrawId(state, action) {
-      state.id = action.payload
+    addDrawnNumber: (state, action) => {
+      state.draws[state.draws.length - 1].numbers.push(action.payload)
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getDraws.fulfilled, (state, action) => {
+        state.draws = action.payload
+      })
+      .addCase(getNumbers.fulfilled, (state, action) => {
+        state.allnumbers = action.payload
+      })
+      .addCase(updateDraws.fulfilled, (state, action) => {
+        
+      })
+  }
 });
 
-export const { setDrawId } = drawSlice.actions
+export const { addDrawnNumber } = drawSlice.actions
 
 
 export default drawSlice.reducer
