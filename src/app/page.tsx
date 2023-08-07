@@ -4,8 +4,9 @@ import Image from 'next/image'
 import SigninButton from './components/SigninButton'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
-import { getDraws, getNumbers } from '@/store/features/drawSlice'
+import { addDrawnNumber, getDraws, getNumbers } from '@/store/features/drawSlice'
 import DrawNumber from './components/DrawNumber'
+import { pusherClient } from '@/lib/pusher'
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -18,6 +19,21 @@ export default function Home() {
     dispatch(getDraws())
     dispatch(getNumbers())
   }, [dispatch])
+
+  useEffect(() => {
+    pusherClient.subscribe('test')
+
+    const numberHandler = (number: string) => {
+      dispatch(addDrawnNumber(number))
+    }
+
+    pusherClient.bind('number:new', numberHandler)
+
+    return () => {
+      pusherClient.unsubscribe('test')
+      pusherClient.unbind('number:new', numberHandler)
+    }
+  }, [])
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
