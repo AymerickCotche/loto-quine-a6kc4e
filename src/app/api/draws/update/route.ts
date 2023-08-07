@@ -1,5 +1,7 @@
-import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { NextResponse } from "next/server"
+import prisma from "@/lib/prisma"
+
+import { pusherServer } from "@/lib/pusher"
 
 export async function POST(req: Request, res: Response) {
 
@@ -12,9 +14,10 @@ export async function POST(req: Request, res: Response) {
         drawId: res.drawId
       }
     })
-
     
-    return NextResponse.json(results)
+    await pusherServer.trigger('test', 'number:new', res.numberValue)
+
+    return NextResponse.json(res)
 
   } catch (err) {
     console.log(err);

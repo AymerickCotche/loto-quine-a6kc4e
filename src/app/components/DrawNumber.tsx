@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
-import { setDrawNumberInput } from '@/store/features/displaySlice';
-import { addDrawnNumber, updateDraws } from '@/store/features/drawSlice';
+import { setDrawNumberInput } from '@/store/features/displaySlice'
+import { addDrawnNumber, updateDraws } from '@/store/features/drawSlice'
 
 const DrawNumber: React.FC = () => {
   const dispatch = useAppDispatch()

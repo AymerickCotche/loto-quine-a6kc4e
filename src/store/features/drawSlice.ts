@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-
+import Pusher from "pusher-js"
+import { json } from "stream/consumers"
 
 export interface Number {
   id: string,
@@ -45,11 +46,18 @@ export const getNumbers = createAsyncThunk(
 export const updateDraws = createAsyncThunk(
   'draw/updateDraws',
   async (data: dataObj, thunkAPI) => {
-    const draw = await fetch('/api/draws/update', {
+    const response = await fetch('/api/draws/update', {
       method: 'POST',
       body: JSON.stringify(data)
     })
-    return draw.json()
+    const draw = await response.json()
+    // const responsePusher = await fetch('/api/pusher', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     message: draw.numberValue
+    //   })
+    // })
+    return draw
   }
 )
 
