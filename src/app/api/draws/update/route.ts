@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import prisma from "@/lib/prisma"
 
+import prisma from "@/lib/prisma"
 import { pusherServer } from "@/lib/pusher"
 
 export async function POST(req: Request, res: Response) {

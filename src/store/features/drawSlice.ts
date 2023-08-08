@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import Pusher from "pusher-js"
-import { json } from "stream/consumers"
 
 export interface Number {
   id: string,

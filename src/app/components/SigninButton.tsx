@@ -1,9 +1,19 @@
 'use client'
+import { setUserInfos } from '@/store/features/userSlice'
+import { useAppDispatch } from '@/store/hook'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const SigninButton = () => {
+  const dispatch = useAppDispatch()
   const {data:session} = useSession()
+
+  useEffect(() => {
+    if(session && session.user) {
+      dispatch(setUserInfos({name: session.user.name, id: session.user.id}))
+    }
+  }, [session, dispatch])
+
   if(session && session.user) {
     return (
       <div className='flex gap-4 ml-auto'>

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { addDrawnNumber, getDraws, getNumbers } from '@/store/features/drawSlice'
 import DrawNumber from './components/DrawNumber'
 import { pusherClient } from '@/lib/pusher'
+import GameSession from './components/GameSession'
 
 
 export default function Home() {
@@ -44,19 +45,25 @@ export default function Home() {
       </header>
       <main>
         <div>
-          <h2>Historique</h2>
+          <h2>Dernier tirage</h2>
           <div>
             {latestDraw && (
               <div>
-                <p>{latestDraw.name}</p>
-                <div>
+                <p>Tirage : {latestDraw.name}</p>
+                <div className='flex gap-2 flex-wrap items-center'>
                   {latestDraw.numbers.map((number, index) => (
-                    <p key={index}>{number}</p>
+                    <div key={index} className={index === latestDraw.numbers.length - 1 ? 'w-12 h-12 bg-yellow-500 rounded-full flex justify-center items-center' : 'w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center'}>
+
+                      <p className={index === latestDraw.numbers.length - 1 ? 'text-blue-800 text-3xl font-bold' : 'text-white text-2xl'} >{number}</p>
+                    </div>
                   ))}
                 </div>
               </div>
             )}
           </div>
+        </div>
+        <div>
+          <GameSession/>
         </div>
 
         <div>

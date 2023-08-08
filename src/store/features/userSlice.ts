@@ -5,7 +5,7 @@ export interface UserState {
   id: string
   name: string
   session: string
-  card: []
+  cards: []
 }
 
 // Initial state
@@ -13,7 +13,7 @@ const initialState: UserState = {
   id: '',
   name: '',
   session: '',
-  card: [],
+  cards: [],
 };
 
 // Actual Slice
@@ -22,13 +22,14 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     
-    setUserId(state, action) {
-      state.id = action.payload
+    setUserInfos(state, action) {
+      state.id = action.payload.id
+      state.name = action.payload.name
     },
   },
 });
 
-export const { setUserId } = userSlice.actions
+export const { setUserInfos } = userSlice.actions
 
 
 export default userSlice.reducer
