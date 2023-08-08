@@ -4,10 +4,9 @@ import { revalidatePath } from 'next/cache'
 import prisma from "@/lib/prisma"
 
 
-export async function GET(request:NextRequest) {
+export async function GET(request:Request) {
   try {
-    const path = request.nextUrl.searchParams.get('path')
-    revalidatePath(path!)
+    console.log(request.url)
     const results = await prisma.draw.findMany({
       include: {
         numbers: {
