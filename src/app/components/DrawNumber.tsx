@@ -23,7 +23,7 @@ const DrawNumber: React.FC = () => {
         numberId: numberData.id,
         numberValue: drawNumberInput
       }
-      dispatch(addDrawnNumber(drawNumberInput))
+      // dispatch(addDrawnNumber(drawNumberInput))
       dispatch(updateDraws(bodyData))
     }
     

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { addDrawnNumber, getDraws, getNumbers } from '@/store/features/drawSlice'
 import DrawNumber from './components/DrawNumber'
 import { pusherClient } from '@/lib/pusher'
-import { find } from 'lodash'
+
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -25,12 +25,7 @@ export default function Home() {
     pusherClient.subscribe('test')
 
     const numberHandler = (number: string) => {
-      if (latestDraw) {
-        console.log(latestDraw)
-        if (!find(latestDraw.numbers, number)){
-          dispatch(addDrawnNumber(number))
-        }
-      }
+      dispatch(addDrawnNumber(number))
     }
 
     pusherClient.bind('number:new', numberHandler)
@@ -39,7 +34,7 @@ export default function Home() {
       pusherClient.unsubscribe('test')
       pusherClient.unbind('number:new', numberHandler)
     }
-  }, [dispatch, latestDraw])
+  }, [dispatch])
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
