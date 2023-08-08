@@ -26,6 +26,7 @@ export interface dataObj {
 }
 
 // AsyncThunk
+export const revalidate = 0
 
 export const getDraws = createAsyncThunk(
   'draw/getDraws',
