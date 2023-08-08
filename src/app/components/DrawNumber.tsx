@@ -1,4 +1,4 @@
-// components/FormAddCard.tsx
+'use client'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
