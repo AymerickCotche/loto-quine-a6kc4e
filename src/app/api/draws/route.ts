@@ -1,10 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server"
+import { revalidatePath } from 'next/cache'
 
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma"
 
 
-export async function GET() {
+export async function GET(request:NextRequest) {
   try {
+    const path = request.nextUrl.searchParams.get('path')
+    revalidatePath(path!)
     const results = await prisma.draw.findMany({
       include: {
         numbers: {
