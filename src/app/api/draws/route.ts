@@ -38,6 +38,4 @@ export async function GET() {
     console.log(err);
     return NextResponse.json({error: err})
   }
-}
-
-export const revalidate = 1
+};
