@@ -26,6 +26,7 @@ export default function Home() {
 
     const numberHandler = (number: string) => {
       if (latestDraw) {
+        console.log(latestDraw)
         if (!find(latestDraw.numbers, number)){
           dispatch(addDrawnNumber(number))
         }
