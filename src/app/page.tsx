@@ -33,7 +33,7 @@ export default function Home() {
       pusherClient.unsubscribe('test')
       pusherClient.unbind('number:new', numberHandler)
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
