@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import prisma from "@/lib/prisma"
 
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const results = await prisma.draw.findMany({
       include: {
