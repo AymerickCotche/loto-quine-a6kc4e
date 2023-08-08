@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getDraws())
     dispatch(getNumbers())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     pusherClient.subscribe('test')
