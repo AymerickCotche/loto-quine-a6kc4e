@@ -10,6 +10,7 @@ import SessionProviders from './components/SessionProviders'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const fetchCache = 'force-no-store'
 export const revalidate = 0
 
 export default function RootLayout({
