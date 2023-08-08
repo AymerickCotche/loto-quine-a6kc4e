@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import prisma from "@/lib/prisma"
 
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const results = await prisma.draw.findMany({
       include: {
@@ -39,4 +39,6 @@ export async function GET() {
     console.log(err);
     return NextResponse.json({error: err})
   }
-};
+}
+
+export const revalidate = 0
