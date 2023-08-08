@@ -10,6 +10,8 @@ import SessionProviders from './components/SessionProviders'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const revalidate = 0
+
 export default function RootLayout({
   children,
 }: {

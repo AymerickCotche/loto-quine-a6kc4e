@@ -8,6 +8,8 @@ import { addDrawnNumber, getDraws, getNumbers } from '@/store/features/drawSlice
 import DrawNumber from './components/DrawNumber'
 import { pusherClient } from '@/lib/pusher'
 
+export const revalidate = 0
+
 export default function Home() {
   const dispatch = useAppDispatch()
 
@@ -66,5 +68,3 @@ export default function Home() {
     </div>
   )
 }
-
-export const revalidate = 1
