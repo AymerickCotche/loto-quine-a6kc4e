@@ -26,13 +26,11 @@ export interface dataObj {
 }
 
 // AsyncThunk
-export const fetchCache = 'force-no-store'
-export const revalidate = 0
 
 export const getDraws = createAsyncThunk(
   'draw/getDraws',
   async (_, thunkAPI) => {
-    const draws = await fetch('/api/draws', { cache: 'no-store' })
+    const draws = await fetch('/api/draws')
     return draws.json()
   }
 )
