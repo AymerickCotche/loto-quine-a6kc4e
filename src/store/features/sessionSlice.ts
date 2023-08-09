@@ -8,8 +8,15 @@ export interface Session {
   status: boolean
 }
 
+export interface FetchedSession {
+  userId: string
+  sessionId: string
+  session: Session
+}
+
 export interface SessionState {
-  sessions: []
+  sessions: FetchedSession[]
+  selectedSession: FetchedSession
 }
 
 type UserId = string
@@ -27,7 +34,17 @@ export const setGameSessions = createAsyncThunk(
 
 // Initial state
 const initialState: SessionState = {
-  sessions: []
+  sessions: [],
+  selectedSession: {
+    userId: '',
+    sessionId: '',
+    session: {
+      id: '',
+      name: '',
+      date: '',
+      status: false
+    }
+  }
 };
 
 // Actual Slice
@@ -39,17 +56,19 @@ export const sessionSlice = createSlice({
     setSessionId(state, action) {
       state.sessions = action.payload
     },
+    setSelectedSession(state, action) {
+      state.selectedSession = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(setGameSessions.fulfilled, (state, action) => {
         state.sessions = action.payload
       })
-      
   }
 });
 
-export const { setSessionId } = sessionSlice.actions
+export const { setSessionId, setSelectedSession } = sessionSlice.actions
 
 
 export default sessionSlice.reducer

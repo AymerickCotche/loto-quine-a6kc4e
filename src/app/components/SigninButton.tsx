@@ -11,6 +11,7 @@ const SigninButton = () => {
   useEffect(() => {
     if(session && session.user) {
       dispatch(setUserInfos({name: session.user.name, id: session.user.id}))
+      
     }
   }, [session, dispatch])
 

@@ -13,26 +13,9 @@ export async function GET(request: Request, { params }: { params: { id: string }
       }
     );
   }
-  const userPosts = await prisma.card.findMany({
-    where: { userId: params.id },
-    include: {
-      user: {
-        select: {
-          name: true,
-        },
-      },
-      numbers: {
-        select: {
-          number: {
-            select: {
-              id: true,
-              value: true
-            }
-          },
-        },
-      },
-    },
+  const user = await prisma.user.findUnique({
+    where: { id: params.id },
   });
 
-  return new Response(JSON.stringify(userPosts));
+  return new Response(JSON.stringify(user));
 }

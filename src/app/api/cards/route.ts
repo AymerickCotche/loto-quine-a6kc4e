@@ -7,12 +7,25 @@ import prisma from "@/lib/prisma"
 export async function POST(req: Request, res: Response) {
   try {
     const res = await req.json()
-    const results = await prisma.usersOnSessions.findMany({
+
+    const results = await prisma.card.findMany({
       where: {
-        userId: res.userId ? res.userId: ''
+        sessionId: res.sessionId
       },
       include: {
-        session: true
+        user: {
+          select: {
+            id: true,
+            name: true
+          }
+        },
+        numbers: {
+          include: {
+            number: {
+              
+            }
+          }
+        }
       }
     });
 

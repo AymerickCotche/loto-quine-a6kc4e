@@ -4,10 +4,12 @@ import Image from 'next/image'
 import SigninButton from './components/SigninButton'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
-import { addDrawnNumber, getDraws, getNumbers } from '@/store/features/drawSlice'
+import { addDrawnNumber, getDraws, getNumbers, resetNumberDrawn } from '@/store/features/drawSlice'
 import DrawNumber from './components/DrawNumber'
 import { pusherClient } from '@/lib/pusher'
 import GameSession from './components/GameSession'
+import Cards from './components/Cards'
+import { setDrawn } from '@/store/features/cardSlice'
 
 
 export default function Home() {
@@ -17,6 +19,10 @@ export default function Home() {
 
   const latestDraw = draws.length > 0 ? draws[draws.length - 1] : null
 
+  const handleReset = () => {
+    dispatch(resetNumberDrawn())
+  }
+
   useEffect(() => {
     dispatch(getDraws())
     dispatch(getNumbers())
@@ -25,8 +31,11 @@ export default function Home() {
   useEffect(() => {
     pusherClient.subscribe('test')
 
-    const numberHandler = (number: string) => {
-      dispatch(addDrawnNumber(number))
+    const numberHandler = async (number: string) => {
+      await dispatch(addDrawnNumber(number))
+      console.log('here')
+      console.log(number)
+      await dispatch(setDrawn(number))
     }
 
     pusherClient.bind('number:new', numberHandler)
@@ -42,6 +51,9 @@ export default function Home() {
       <header>
         <h1>Loto Quine Freedom</h1>
         <SigninButton/>
+        <button onClick={handleReset} className='border border-red-500 bg-black text-white p-2'>
+          reset tirage pour test
+        </button>
       </header>
       <main>
         <div>
@@ -69,6 +81,10 @@ export default function Home() {
         <div>
           <h2>Tirer ici</h2>
           <DrawNumber/>
+        </div>
+        <div>
+          <h2>Cartons</h2>
+          <Cards/>
         </div>
       </main>
     </div>

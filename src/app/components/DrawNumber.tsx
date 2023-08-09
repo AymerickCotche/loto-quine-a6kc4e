@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { setDrawNumberInput } from '@/store/features/displaySlice'
 import { addDrawnNumber, updateDraws } from '@/store/features/drawSlice'
+import { setDrawn } from '@/store/features/cardSlice'
 
 const DrawNumber: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -25,6 +26,7 @@ const DrawNumber: React.FC = () => {
       }
       // dispatch(addDrawnNumber(drawNumberInput))
       dispatch(updateDraws(bodyData))
+      dispatch(setDrawn(drawNumberInput))
     }
     
     dispatch(setDrawNumberInput(''))

@@ -61,6 +61,23 @@ export const updateDraws = createAsyncThunk(
   }
 )
 
+export const resetNumberDrawn = createAsyncThunk(
+  'draw/resetNumberDrawn',
+  async (_, thunkAPI) => {
+    const response = await fetch('/api/numbers/reset', {
+      method: 'POST',
+    })
+    const draw = await response.json()
+    // const responsePusher = await fetch('/api/pusher', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     message: draw.numberValue
+    //   })
+    // })
+    return draw
+  }
+)
+
 // Initial state
 const initialState: DrawState = {
   draws: [],
@@ -85,6 +102,9 @@ export const drawSlice = createSlice({
         state.allnumbers = action.payload
       })
       .addCase(updateDraws.fulfilled, (state, action) => {
+        
+      })
+      .addCase(resetNumberDrawn.fulfilled, (state, action) => {
         
       })
   }

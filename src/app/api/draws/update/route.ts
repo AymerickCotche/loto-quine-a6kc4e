@@ -14,6 +14,15 @@ export async function POST(req: Request, res: Response) {
         drawId: res.drawId
       }
     })
+
+    await prisma.number.update({
+      where: {
+        value: res.numberValue
+      },
+      data: {
+        drawn: true
+      }
+    })
     
     await pusherServer.trigger('test', 'number:new', res.numberValue)
 
