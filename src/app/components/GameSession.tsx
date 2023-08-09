@@ -29,7 +29,7 @@ const GameSession = () => {
   
     return (
       <div>
-        <select value={selectedSession.id} onChange={handleChange}>
+        <select value={selectedSession.sessionId} onChange={handleChange}>
           <option value="">Sélectionnez une session</option>
           {sessions.map(gameSession => (
             <option key={gameSession.session.id} value={gameSession.session.id}>{gameSession.session.name}</option>
