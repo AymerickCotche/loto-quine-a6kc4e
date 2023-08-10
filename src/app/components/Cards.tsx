@@ -31,7 +31,6 @@ const Cards = () => {
       <div className='flex gap-2 flex-wrap'>
           {reversedSortedCards.map(card => (
             <Card card={card} key={card.id}/>
-            
           ))}
       </div>
     )
