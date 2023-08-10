@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import React, { useEffect } from 'react'
 import _ from 'lodash'
+import Card from './Card'
 
 const Cards = () => {
   const dispatch = useAppDispatch()
@@ -27,17 +28,9 @@ const Cards = () => {
     }
   }, [selectedSession, dispatch])
     return (
-      <div>
+      <div className='flex gap-2 flex-wrap'>
           {reversedSortedCards.map(card => (
-            <div key={card.id}>
-              <p>Numéro du carton : {card.name}</p>
-              <p>Nom du propiétaire de la carte : {card.user.name}</p>
-              <div className='grid grid-cols-5'>
-                {card.numbers.map(number => (
-                  <span key={number.number.value} className={number.number.drawn ? 'bg-green-200' : ''}>{number.number.value}</span>
-                ))}
-              </div>
-            </div>
+            <Card card={card} key={card.id}/>
           ))}
       </div>
     )

@@ -1,16 +1,16 @@
 'use client'
 
 import Image from 'next/image'
-import SigninButton from './components/SigninButton'
+import SigninButton from '@/app/components/SigninButton'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { addDrawnNumber, getDraws, getNumbers, resetNumberDrawn } from '@/store/features/drawSlice'
-import DrawNumber from './components/DrawNumber'
+import DrawNumber from '@/app/components/DrawNumber'
 import { pusherClient } from '@/lib/pusher'
-import GameSession from './components/GameSession'
-import Cards from './components/Cards'
+import GameSession from '@/app/components/GameSession'
+import Cards from '@/app/components/Cards'
 import { setDrawn } from '@/store/features/cardSlice'
-
+import Header from './components/Header'
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -47,14 +47,8 @@ export default function Home() {
   }, [dispatch])
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      <header>
-        <h1>Loto Quine Freedom</h1>
-        <SigninButton/>
-        <button onClick={handleReset} className='border border-red-500 bg-black text-white p-2'>
-          reset tirage pour test
-        </button>
-      </header>
+    <div className="flex min-h-screen flex-col">
+      <Header/>
       <main>
         <div>
           <h2>Dernier tirage</h2>
