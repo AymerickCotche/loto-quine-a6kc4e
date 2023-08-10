@@ -13,9 +13,9 @@ export default function Header() {
 
   return (
 
-    <header className='flex justify-between p-10 bg-gradient-to-b from-black/40 to-cyan-400/30 border-b-2-silver shadow-lg'>
+    <header className='flex justify-between p-10 bg-gradient-to-b from-cyan-400/40 to-white/50 border-b-2-silver shadow-lg items-center text-fuchsia-500'>
       <nav>
-        <ul className='flex gap-2'>
+        <ul className='flex gap-2 text-lg'>
           <li>
             Accueil
           </li>
@@ -27,7 +27,7 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-      <h1>Loto Quine Freedom</h1>
+      <h1 className='text-3xl font-bold'>Loto Quine Freedom</h1>
       <div>
         <SigninButton/>
         <button onClick={handleReset} className='border border-red-500 bg-black text-white p-2'>

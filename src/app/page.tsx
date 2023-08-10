@@ -50,32 +50,39 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <Header/>
       <main>
-        <div>
-          <h2>Dernier tirage</h2>
-          <div>
-            {latestDraw && (
-              <div>
-                <p>Tirage : {latestDraw.name}</p>
-                <div className='flex gap-2 flex-wrap items-center'>
-                  {latestDraw.numbers.map((number, index) => (
-                    <div key={index} className={index === latestDraw.numbers.length - 1 ? 'w-12 h-12 bg-yellow-500 rounded-full flex justify-center items-center' : 'w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center'}>
+        <div className='flex'>
+          <div className='flex-1'>
+            <h2>Dernier tirage</h2>
+            <div>
+              {latestDraw && (
+                <div>
+                  <p>Tirage : {latestDraw.name}</p>
+                  <div className='flex gap-2 flex-wrap items-center'>
+                    {latestDraw.numbers.map((number, index) => (
+                      <div key={index} className={index === latestDraw.numbers.length - 1 ? 'w-12 h-12 bg-yellow-500 rounded-full flex justify-center items-center' : 'w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center'}>
 
-                      <p className={index === latestDraw.numbers.length - 1 ? 'text-blue-800 text-3xl font-bold' : 'text-white text-2xl'} >{number}</p>
-                    </div>
-                  ))}
+                        <p className={index === latestDraw.numbers.length - 1 ? 'text-blue-800 text-3xl font-bold' : 'text-white text-2xl'} >{number}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <GameSession/>
+            </div>
+
+            <div>
+              <h2>Tirer ici</h2>
+              <DrawNumber/>
+            </div>
           </div>
         </div>
-        <div>
-          <GameSession/>
-        </div>
-
-        <div>
-          <h2>Tirer ici</h2>
-          <DrawNumber/>
-        </div>
+          
+        
         <div>
           <h2>Cartons</h2>
           <Cards/>
