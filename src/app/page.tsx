@@ -12,6 +12,7 @@ import Cards from '@/app/components/Cards'
 import { setDrawn } from '@/store/features/cardSlice'
 import Header from './components/Header'
 import { signIn } from 'next-auth/react'
+import FormAddCard from './components/FormAddCard'
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -20,6 +21,7 @@ export default function Home() {
 
   const { id } = useAppSelector(state => state.user)
   const { name } = useAppSelector(state => state.user)
+  const { showAddCardModal } = useAppSelector(state => state.display)
 
   const latestDraw = draws.length > 0 ? draws[draws.length - 1] : null
 
@@ -108,7 +110,9 @@ export default function Home() {
           </div>
         }
           
-        
+        {!showAddCardModal &&
+          <FormAddCard/>
+        }
         
       </main>
     </div>
