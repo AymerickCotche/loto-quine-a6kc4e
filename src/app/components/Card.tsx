@@ -15,7 +15,7 @@ const Card = ({card}: Props) => {
 
           <div className='grid grid-cols-5 border border-green-800'>
             {card.numbers.map(number => (
-              <span key={number.number.value} className={number.number.drawn ? 'bg-green-200 py-2 px-2 text-center border border-green-800' : 'py-2 text-center border border-green-800'}>{number.number.value}</span>
+              <span key={number.number.value} className={number.number.drawn ? 'bg-green-200 py-2 px-1 text-center border border-green-800' : 'py-2 text-center border px-1 border-green-800'}>{number.number.value}</span>
             ))}
           </div>
 
