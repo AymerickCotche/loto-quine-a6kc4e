@@ -30,7 +30,7 @@ export default function Header() {
       <h1 className='text-3xl font-bold'>Loto Quine Freedom</h1>
       <div>
         <SigninButton/>
-        <button onClick={handleReset} className='border border-red-500 bg-black text-white p-2'>
+        <button onClick={handleReset} className='hidden border border-red-500 bg-black text-white p-2'>
           reset tirage pour test
         </button>
       </div>
