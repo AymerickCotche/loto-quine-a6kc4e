@@ -28,10 +28,22 @@ const Cards = () => {
     }
   }, [selectedSession, dispatch])
     return (
-      <div className='flex gap-2 flex-wrap'>
-          {reversedSortedCards.map(card => (
-            <Card card={card} key={card.id}/>
-          ))}
+      <div>
+        <h2>Cartons</h2>
+        {selectedSession.sessionId &&
+          
+          <div className='flex gap-2 flex-wrap'>
+              {reversedSortedCards.map(card => (
+                <Card card={card} key={card.id}/>
+              ))}
+          </div>
+        }
+
+        {!selectedSession.sessionId && 
+          <div>
+            <p>Sélectionnez une session pour voir vous cartons</p>
+          </div>
+        }
       </div>
     )
   
