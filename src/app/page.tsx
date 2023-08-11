@@ -50,9 +50,9 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <Header/>
       <main>
-        <div className='flex'>
+        <div className='flex-col md:flex-row'>
           <div className='flex-1'>
-            <h2>Dernier tirage</h2>
+            <h2>Ici s&apos;affiche le dernier tirage</h2>
             <div>
               {latestDraw && (
                 <div>
@@ -76,7 +76,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h2>Tirer ici</h2>
+              <h2>Zone de tirage</h2>
               <DrawNumber/>
             </div>
           </div>

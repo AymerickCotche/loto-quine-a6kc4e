@@ -14,7 +14,7 @@ export default function Header() {
   return (
 
     <header className='flex justify-between p-10 bg-gradient-to-b from-cyan-400/40 to-white/50 border-b-2-silver shadow-lg items-center text-fuchsia-500'>
-      <nav>
+      <nav className='hidden md:block'>
         <ul className='flex gap-2 text-lg'>
           <li>
             Accueil
