@@ -10,7 +10,7 @@ export async function POST(req: Request, res: Response) {
     
     const results = await prisma.numbersOnDraws.create({
       data: {
-        numberId: res.numberId,
+        numberValue: res.numberValue,
         drawId: res.drawId
       }
     })

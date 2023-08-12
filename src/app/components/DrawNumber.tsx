@@ -17,17 +17,15 @@ const DrawNumber: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const numberData = allnumbers.find(number => number.value === drawNumberInput)
-    if (numberData) {
-      const bodyData = {
-        drawId: 'clkz71ir40000ly8xca7vhei4',
-        numberId: numberData.id,
-        numberValue: drawNumberInput
-      }
-      // dispatch(addDrawnNumber(drawNumberInput))
-      dispatch(updateDraws(bodyData))
-      dispatch(setDrawn(drawNumberInput))
+    
+    const bodyData = {
+      drawId: 'clkz71ir40000ly8xca7vhei4',
+      numberValue: drawNumberInput
     }
+    // dispatch(addDrawnNumber(drawNumberInput))
+    dispatch(updateDraws(bodyData))
+    dispatch(setDrawn(drawNumberInput))
+    
     
     dispatch(setDrawNumberInput(''))
 

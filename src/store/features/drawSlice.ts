@@ -19,7 +19,6 @@ export interface DrawState {
 
 export interface dataObj {
   drawId: string
-  numberId: string
   numberValue: string
 }
 
