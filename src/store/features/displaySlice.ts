@@ -2,13 +2,28 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
 // Types
 
+export interface Session {
+  id: string
+  name: string
+  date: string
+  status: boolean
+}
+
+export interface FetchedSession {
+  userId: string
+  sessionId: string
+  session: Session
+}
 
 export interface DisplaySlice {
   drawNumberInput: string
   showAddCardModal: boolean
   cardNumberInput: string
   numValuesInput: string[]
+  selectedSessionForm : FetchedSession
 }
+
+
 
 // AsyncThunk
 
@@ -18,7 +33,17 @@ const initialState: DisplaySlice = {
   drawNumberInput: '',
   showAddCardModal: false,
   cardNumberInput: '',
-  numValuesInput: []
+  numValuesInput: [],
+  selectedSessionForm: {
+    userId: '',
+    sessionId: '',
+    session: {
+      id: '',
+      name: '',
+      date: '',
+      status: false
+    }
+  }
 };
 
 // Actual Slice
@@ -40,6 +65,9 @@ export const displaySlice = createSlice({
     setCardNumber: (state, action) => {
       state.cardNumberInput = action.payload;
     },
+    setSelectedSessionForm(state, action) {
+      state.selectedSessionForm = action.payload
+    },
   },
 });
 
@@ -54,7 +82,7 @@ export const addNewCard = createAsyncThunk(
   }
 )
 
-export const { setDrawNumberInput, toggleShowAddCardModal, setNumValue, setCardNumber } = displaySlice.actions
+export const { setDrawNumberInput, toggleShowAddCardModal, setNumValue, setCardNumber, setSelectedSessionForm } = displaySlice.actions
 
 
 export default displaySlice.reducer

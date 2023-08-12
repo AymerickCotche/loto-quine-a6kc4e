@@ -1,12 +1,16 @@
 // components/FormAddCard.tsx
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hook'
-import { addNewCard, setCardNumber, setNumValue, toggleShowAddCardModal } from '@/store/features/displaySlice';
+import { addNewCard, setCardNumber, setNumValue, setSelectedSessionForm, toggleShowAddCardModal } from '@/store/features/displaySlice';
 
 const FormAddCard: React.FC = () => {
-  const cardNumberInput = useAppSelector((state) => state.display.cardNumberInput);
-  const numValuesInput = useAppSelector((state) => state.display.numValuesInput);
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
+
+  const cardNumberInput = useAppSelector((state) => state.display.cardNumberInput)
+  const numValuesInput = useAppSelector((state) => state.display.numValuesInput)
+  const {sessions} = useAppSelector(state => state.session)
+  const {selectedSessionForm} = useAppSelector(state => state.display)
+  
 
   const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setCardNumber(event.target.value));
@@ -15,6 +19,12 @@ const FormAddCard: React.FC = () => {
   const handleChangeNumValue = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setNumValue({ index, value: event.target.value }));
   };
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const sessionId = event.target.value;
+    const foundSession = sessions.find(gameSession => gameSession.session.id === sessionId)
+    dispatch(setSelectedSessionForm(foundSession))
+  }
 
   const handleClickCloseModal = () => {
     dispatch(toggleShowAddCardModal(''))
@@ -43,11 +53,17 @@ const FormAddCard: React.FC = () => {
         Fermer
       </button>
       <form onSubmit={handleSubmit} className="">
+        <select value={selectedSessionForm.sessionId} onChange={handleChange}>
+          <option value="">Sélectionnez une session</option>
+          {sessions.map(gameSession => (
+            <option key={gameSession.session.id} value={gameSession.session.id}>{gameSession.session.name}</option>
+          ))}
+        </select>
         <label htmlFor="cardNumber" className="block font-medium mb-2">
           Numéro du carton
         </label>
         <input
-          type="text"
+          type="number"
           id="cardNumber"
           value={cardNumberInput}
           onChange={handleChangeCardNumber}
@@ -59,7 +75,7 @@ const FormAddCard: React.FC = () => {
             <div key={index} className="mb-4">
               <label htmlFor={`num${index + 1}`} className="block font-medium mb-2">{`Num${index + 1}:`}</label>
               <input
-                type="text"
+                type="number"
                 id={`num${index + 1}`}
                 value={numValuesInput[index]}
                 onChange={(event) => handleChangeNumValue(index, event)}

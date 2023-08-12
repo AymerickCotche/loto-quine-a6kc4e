@@ -63,17 +63,17 @@ model UsersOnSessions {
 model NumbersOnCards {
   card     Card     @relation(fields: [cardId], references: [id])
   cardId   String
-  number   Number   @relation(fields: [numberId], references: [id])
-  numberId String
+  number   Number   @relation(fields: [numberValue], references: [value])
+  numberValue String
 
-  @@id([cardId, numberId])
+  @@id([cardId, numberValue])
 }
 
 model NumbersOnDraws {
   draw     Draw     @relation(fields: [drawId], references: [id])
   drawId   String
-  number   Number   @relation(fields: [numberId], references: [id])
-  numberId String
+  number   Number   @relation(fields: [numberValue], references: [value])
+  numberValue String
 
-  @@id([drawId, numberId])
+  @@id([drawId, numberValue])
 }
