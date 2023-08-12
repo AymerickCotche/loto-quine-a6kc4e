@@ -10,6 +10,9 @@ const DrawNumber: React.FC = () => {
 
   const {drawNumberInput} = useAppSelector(state => state.display)
   const {allnumbers} = useAppSelector(state => state.draw)
+  const {draws} = useAppSelector(state => state.draw)
+
+  const lastestDraw = draws[draws.length - 1]
 
   const hcDrawNumberInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setDrawNumberInput(event.target.value))
@@ -19,7 +22,7 @@ const DrawNumber: React.FC = () => {
     event.preventDefault()
     
     const bodyData = {
-      drawId: 'cll7tcr5v002olyd52x4uf03e',
+      drawId: lastestDraw.id,
       numberValue: drawNumberInput
     }
     // dispatch(addDrawnNumber(drawNumberInput))
