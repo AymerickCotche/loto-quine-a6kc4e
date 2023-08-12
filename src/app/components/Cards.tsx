@@ -1,9 +1,6 @@
 'use client'
-import { setDrawn, setSessionCards } from '@/store/features/cardSlice'
-import { setGameSessions } from '@/store/features/sessionSlice'
-import { setUserInfos } from '@/store/features/userSlice'
+import {setSessionCards } from '@/store/features/cardSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hook'
-import { signIn, signOut, useSession } from 'next-auth/react'
 import React, { useEffect } from 'react'
 import _ from 'lodash'
 import Card from './Card'
@@ -27,25 +24,29 @@ const Cards = () => {
       dispatch(setSessionCards(selectedSession.sessionId))
     }
   }, [selectedSession, dispatch])
-    return (
-      <div>
-        <h2>Cartons</h2>
-        {selectedSession.sessionId &&
-          
-          <div className='flex gap-2 flex-wrap'>
-              {reversedSortedCards.map(card => (
-                <Card card={card} key={card.id}/>
-              ))}
-          </div>
-        }
 
-        {!selectedSession.sessionId && 
-          <div>
-            <p>Sélectionnez une session pour voir vous cartons</p>
-          </div>
-        }
+
+  return (
+    <div>
+      <div className='flex gap-4 items-center'>
+        <h2 className='font-bold text-xl'>Cartons</h2> 
       </div>
-    )
+      {selectedSession.sessionId &&
+        
+        <div className='flex gap-2 flex-wrap'>
+            {reversedSortedCards.map(card => (
+              <Card card={card} key={card.id}/>
+            ))}
+        </div>
+      }
+
+      {!selectedSession.sessionId && 
+        <div>
+          <p>Sélectionnez une session pour voir vous cartons</p>
+        </div>
+      }
+    </div>
+  )
   
 }
 
