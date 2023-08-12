@@ -1,7 +1,8 @@
 // components/FormAddCard.tsx
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hook'
-import { addNewCard, setCardNumber, setNumValue, setSelectedSessionForm, toggleShowAddCardModal } from '@/store/features/displaySlice';
+import { setCardNumber, setNumValue, setSelectedSessionForm, toggleShowAddCardModal } from '@/store/features/displaySlice';
+import { addCard } from '@/store/features/cardSlice';
 
 const FormAddCard: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -10,6 +11,7 @@ const FormAddCard: React.FC = () => {
   const numValuesInput = useAppSelector((state) => state.display.numValuesInput)
   const {sessions} = useAppSelector(state => state.session)
   const {selectedSessionForm} = useAppSelector(state => state.display)
+  const {id} = useAppSelector(state => state.user)
   
 
   const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,16 +35,17 @@ const FormAddCard: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const concatenatedNums = numValuesInput.join(',');
-    // // dispatch(addNewCard({
-    // //   cardNumber: cardNumberInput,
-    // //   playedNumber: concatenatedNums
-    // // }))
+    dispatch(addCard({
+      cardName: cardNumberInput,
+      userId: id,
+      sessionId: selectedSessionForm.sessionId,
+      numbers: numValuesInput
+    }))
 
-    for (let i = 0; i< 15; i++) {
-      dispatch(setNumValue({ index : i, value: "" }));
-    }
-    dispatch(setCardNumber(""));
+    // for (let i = 0; i< 15; i++) {
+    //   dispatch(setNumValue({ index : i, value: "" }));
+    // }
+    // dispatch(setCardNumber(""));
     // // Vous pouvez effectuer ici l'action que vous souhaitez avec la chaîne de caractères concaténée
   };
 

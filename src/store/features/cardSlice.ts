@@ -75,8 +75,36 @@ export const cardSlice = createSlice({
       .addCase(setSessionCards.fulfilled, (state, action) => {
         state.cards = action.payload
       })
+      .addCase(addCard.fulfilled, (state, action) => {
+        console.log(action.payload)
+        // state.cards = action.payload
+      })
   }
 });
+interface cardObj {
+  userId: string
+  sessionId: string
+  cardName: string
+  numbers: string[]
+}
+
+export const addCard = createAsyncThunk(
+  'card/addCard',
+  async (data: cardObj, thunkAPI) => {
+    const response = await fetch('/api/cards/addone', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    const draw = await response.json()
+    // const responsePusher = await fetch('/api/pusher', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     message: draw.numberValue
+    //   })
+    // })
+    return draw
+  }
+)
 
 export const { setCardId, setDrawn } = cardSlice.actions
 

@@ -86,7 +86,7 @@ export default function Home() {
                 <GameSession/>
               </div>
 
-              {name === 'test' &&
+              {name === 'a6kc4e' &&
               
                 <div>
                   <h2>Zone de tirage</h2>
