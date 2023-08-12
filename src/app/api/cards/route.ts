@@ -20,12 +20,11 @@ export async function POST(req: Request, res: Response) {
           }
         },
         numbers: {
-          include: {
-            number: {
-              
-            }
+          select: {
+            numberValue: true
           }
         }
+        
       }
     });
 
