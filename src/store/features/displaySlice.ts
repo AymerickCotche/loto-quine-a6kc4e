@@ -52,18 +52,18 @@ export const displaySlice = createSlice({
   initialState,
   reducers: {
     setDrawNumberInput: (state, action) => {
-      state.drawNumberInput = action.payload;
+      state.drawNumberInput = action.payload
     },
     toggleShowAddCardModal(state, action) {
       state.showAddCardModal = !state.showAddCardModal
     },
 
     setNumValue: (state, action) => {
-      const { index, value } = action.payload;
-      state.numValuesInput[index] = value;
+      const { index, value } = action.payload
+      state.numValuesInput[index] = value
     },
     setCardNumber: (state, action) => {
-      state.cardNumberInput = action.payload;
+      state.cardNumberInput = action.payload
     },
     setSelectedSessionForm(state, action) {
       state.selectedSessionForm = action.payload
