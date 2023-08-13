@@ -1,8 +1,11 @@
 import prisma from "@/lib/prisma"
 
 interface RequestBody {
-  userId: string
-  sessionId: string
+  data: {
+    userId: string
+    sessionId: string
+    sessionName: string
+  }
 }
 
 export async function POST(request:Request) {
@@ -10,10 +13,12 @@ export async function POST(request:Request) {
 
   const session = await prisma.usersOnSessions.create({
     data: {
-      userId: body.userId,
-      sessionId: body.sessionId
+      userId: body.data.userId,
+      sessionId: body.data.sessionId
     }
   })
 
-  return new Response(JSON.stringify(session))
+  const sessionWithName = {...session, sessionName: body.data.sessionName}
+
+  return new Response(JSON.stringify(sessionWithName))
 }

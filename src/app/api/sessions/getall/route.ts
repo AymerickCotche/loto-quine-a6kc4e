@@ -5,7 +5,13 @@ export async function GET(request:Request) {
 
   const sessions = await prisma.session.findMany()
   
-  return new Response(JSON.stringify(sessions))
+  const formatedSessions = sessions.map(session => ({
+    sessionId: session.id,
+    name: session.name,
+    date: session.date,
+    status: session.status
+  }))
+  return new Response(JSON.stringify(formatedSessions))
 }
 
 export const revalidate = 0

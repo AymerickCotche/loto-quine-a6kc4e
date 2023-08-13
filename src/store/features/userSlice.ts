@@ -54,6 +54,12 @@ export const userSlice = createSlice({
       .addCase(getUsersWithSession.fulfilled, (state, action) => {
         state.usersWithSession = action.payload
       })
+      .addCase(addUserOnSession.fulfilled, (state, action) => {
+        state.selectedUserWithSession.sessions.push({
+          id: action.payload.sessionId,
+          name: action.payload.sessionName
+        })
+      })
   }
 });
 
@@ -66,6 +72,22 @@ export const getUsersWithSession = createAsyncThunk(
       method: 'GET',
     })
     return users.json()
+  }
+)
+interface UserOnSession {
+  userId: string,
+  sessionId: string,
+  sessionName: string
+}
+
+export const addUserOnSession = createAsyncThunk(
+  'user/addUserToSession',
+  async (data: UserOnSession, thunkAPI) => {
+    const userOnSession = await fetch(`/api/user/addonsession`,  {
+      method: 'POST',
+      body: JSON.stringify({data})
+    })
+    return userOnSession.json()
   }
 )
 

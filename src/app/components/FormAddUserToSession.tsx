@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hook'
 import { addUser, setCardNumber, setLogMessage, setNumValue, setSelectedSessionForm, setUserNameInput, setUserPasswordInput, toggleShowAddCardModal } from '@/store/features/displaySlice';
 import { addCard } from '@/store/features/cardSlice';
-import { getUsersWithSession, setSelectedUser } from '@/store/features/userSlice';
+import { addUserOnSession, getUsersWithSession, setSelectedUser } from '@/store/features/userSlice';
 import { getAllSessions } from '@/store/features/sessionSlice';
 
 const FormAddUserToSession: React.FC = () => {
@@ -16,12 +16,25 @@ const FormAddUserToSession: React.FC = () => {
   useEffect(() => {
     dispatch(getUsersWithSession())
     dispatch(getAllSessions())
-  }, [])
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getUsersWithSession())
+    dispatch(getAllSessions())
+  }, [dispatch])
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const userId = event.target.value;
     const foundUser = usersWithSession.find(user => user.id === userId)
     dispatch(setSelectedUser(foundUser))
+  }
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(addUserOnSession({
+      userId: selectedUserWithSession.id,
+      sessionId: event.currentTarget.getAttribute("data-value")!,
+      sessionName: event.currentTarget.getAttribute("data-value2")!
+    }))
   }
 
   return (
@@ -53,7 +66,7 @@ const FormAddUserToSession: React.FC = () => {
             {selectedUserWithSession.id !== '' && 
                 <div>
                   {sessions.map(session => (
-                    <p key={session.sessionId}>{session.name} <span className='text-blue-700 underline hover:cursor-pointer'>ajouter</span></p>
+                    <p key={session.sessionId}>{session.name} <span className='text-blue-700 underline hover:cursor-pointer' data-value={session.sessionId} data-value2={session.name} onClick={handleClick}>ajouter</span></p>
                   ))}
                 </div>
               }
