@@ -7,6 +7,7 @@ import Header from '@/app/components/Header'
 import { addSession, addUser, setLogMessage, setSessionDateInput, setSessionNameInput, setUserNameInput, setUserPasswordInput } from '@/store/features/displaySlice'
 import FormAddUser from '../components/FormAddUser'
 import FormAddSession from '../components/FormAddSession'
+import FormAddUserToSession from '../components/FormAddUserToSession'
 
 export default function Admin() {
   const dispatch = useAppDispatch()
@@ -32,6 +33,7 @@ export default function Admin() {
 
         <FormAddSession/>
 
+        <FormAddUserToSession/>
         <div>
           <h2>Lancer nouveau tirage</h2>
         </div>

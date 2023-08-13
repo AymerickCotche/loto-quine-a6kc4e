@@ -11,6 +11,7 @@ export interface Session {
 export interface FetchedSession {
   userId: string
   sessionId: string
+  name?: string
   session: Session
 }
 
@@ -27,6 +28,16 @@ export const setGameSessions = createAsyncThunk(
     const sessions = await fetch(`/api/sessions`,  {
       method: 'POST',
       body: JSON.stringify({userId})
+    })
+    return sessions.json()
+  }
+)
+
+export const getAllSessions = createAsyncThunk(
+  'session/getAllSessions',
+  async (_, thunkAPI) => {
+    const sessions = await fetch(`/api/sessions/getall`,  {
+      method: 'GET',
     })
     return sessions.json()
   }
@@ -63,6 +74,9 @@ export const sessionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(setGameSessions.fulfilled, (state, action) => {
+        state.sessions = action.payload
+      })
+      .addCase(getAllSessions.fulfilled, (state, action) => {
         state.sessions = action.payload
       })
   }
